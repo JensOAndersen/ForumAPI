@@ -1,0 +1,25 @@
+﻿
+Post comment example:
+
+{
+	"postdate":"2018-10-24",
+	"content":"Oops i deleted my previous best post and all the comments, gggggggg",
+	"user":{
+		"userid":1
+	},
+	"postid":2
+}
+
+
+Put comment example:
+MUST BE ON URL: https://localhost:44327/api/comments/1006 or the like
+
+{
+	"commentId":1006,
+	"postdate":"2018-10-23",
+	"content":"and another comment edit: updated!!!!!",
+	"user":{
+		"userid":2
+	},
+	"postid":3
+}
