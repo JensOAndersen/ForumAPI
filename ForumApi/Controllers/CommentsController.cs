@@ -59,7 +59,8 @@ namespace ForumApi.Controllers
         {
             var res = context.Comments
                                 .Where(c => c.CommentId == id)
-                                .Include(u => u.User).FirstOrDefault();
+                                .Include(u => u.User)
+                                .Include(p => p.Post).FirstOrDefault();
 
             if (res != null)
             {
