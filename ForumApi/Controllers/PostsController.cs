@@ -97,6 +97,7 @@ namespace ForumApi.Controllers
                             PostDate = post.PostDate,
                             User = context.Users.Find(post.User.UserId),
                             Content = post.Content,
+                            Title = post.Title
                         });
 
                         context.SaveChanges();
@@ -128,6 +129,7 @@ namespace ForumApi.Controllers
                     var post = context.Posts.Find(value.PostId);
 
                     post.Content = value.Content;
+                    post.Title = value.Title;
 
                     context.Posts.Update(post);
 

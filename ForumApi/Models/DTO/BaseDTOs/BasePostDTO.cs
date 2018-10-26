@@ -12,5 +12,6 @@ namespace ForumApi.Models.DTO.BaseDTOs
         public DateTime PostDate { get; set; }
         public string Content { get; set; }
         public BaseUserDTO User { get; set; }
+        public string Title { get; set; }
     }
 }

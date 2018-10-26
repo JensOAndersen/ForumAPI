@@ -83,13 +83,14 @@ namespace ForumApi.Controllers
 
             try
             {
-                context.Comments.Add(new Comment()
+                var newComment = new Comment()
                 {
                     Post = post,
                     User = user,
                     Content = value.Content,
                     PostDate = DateTime.Now
-                });
+                };
+                context.Comments.Add(newComment);
 
                 context.SaveChanges();
 

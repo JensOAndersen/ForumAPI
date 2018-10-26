@@ -21,14 +21,7 @@ namespace ForumApi.Models
         {
             var res = from c in comments
                       select CommentToDTO(c);
-                      //new Post_CommentDTO()
-                      //{
-                      //    PostID = c.Post.PostId,
-                      //    CommentId = c.CommentId,
-                      //    PostDate = c.PostDate,
-                      //    Content = c.Content,
-                      //    User = User.UserToDTO(c.User)
-                      //};
+
             return new List<BaseCommentDTO>(res);
         }
 

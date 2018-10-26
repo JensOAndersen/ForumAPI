@@ -5,7 +5,7 @@ Post comment example:
 	"postdate":"2018-10-24",
 	"content":"Oops i deleted my previous best post and all the comments, gggggggg",
 	"user":{
-		"userid":1
+		"userid":1,
 	},
 	"postid":2
 }

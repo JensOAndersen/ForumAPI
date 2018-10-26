@@ -12,10 +12,11 @@ namespace ForumApi.Models
         public DateTime PostDate { get; set; }
         public string Content { get; set; }
         public User User { get; set; }
+        public string Title { get; set; }
+
 
         public ICollection<Comment> Comments { get; set; }
-
-
+    
         public static Post_PostDTO PostToDTO(Post post)
         {
             return new Post_PostDTO
@@ -24,7 +25,8 @@ namespace ForumApi.Models
                 PostDate = post.PostDate,
                 PostId = post.PostId,
                 User = Models.User.UserToDTO(post.User),
-                Comments = Comment.CommentToDTO(post.Comments)
+                Comments = Comment.CommentToDTO(post.Comments),
+                Title = post.Title
             };
         }
 

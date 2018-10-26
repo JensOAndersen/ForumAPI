@@ -28,6 +28,8 @@ namespace ForumApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -37,8 +39,8 @@ namespace ForumApi
             var conString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ForumDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             services.AddDbContext<ForumContext>
-                (options => options.UseInMemoryDatabase("tempforumDB"));
-                //(options => options.UseSqlServer(conString));
+                //(options => options.UseInMemoryDatabase("tempforumDB"));
+                (options => options.UseSqlServer(conString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(
@@ -57,6 +59,10 @@ namespace ForumApi
             {
                 app.UseHsts();
             }
+
+            app.UseCors(
+                builder => builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+                );
 
             app.UseHttpsRedirection();
             app.UseMvc();
