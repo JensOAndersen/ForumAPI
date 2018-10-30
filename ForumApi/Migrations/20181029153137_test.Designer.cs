@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumApi.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20181021193520_initial")]
-    partial class initial
+    [Migration("20181029153137_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,8 @@ namespace ForumApi.Migrations
 
                     b.Property<DateTime>("PostDate");
 
+                    b.Property<string>("Title");
+
                     b.Property<int?>("UserId");
 
                     b.HasKey("PostId");
@@ -82,7 +84,8 @@ namespace ForumApi.Migrations
                 {
                     b.HasOne("ForumApi.Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ForumApi.Models.User", "User")
                         .WithMany("Comments")

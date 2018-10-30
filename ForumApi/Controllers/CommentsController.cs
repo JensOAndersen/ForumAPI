@@ -144,7 +144,7 @@ namespace ForumApi.Controllers
             }
 
             context.Comments.Remove(comment);
-                
+            context.SaveChanges();
             return NoContent();
         }
 
