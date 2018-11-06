@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ForumApi.Models;
 using ForumApi.Models.PostDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,7 @@ namespace ForumApi.Controllers
 
         // GET: api/Post/5
         [HttpGet("{id}", Name = "GetPosts")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             var res = context.Posts

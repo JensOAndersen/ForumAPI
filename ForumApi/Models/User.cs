@@ -17,7 +17,7 @@ namespace ForumApi.Models
 
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
-
+        public string Password { get; set; }
         public static Post_UserDTO UserToDTO(User user)
         {
             return new Post_UserDTO

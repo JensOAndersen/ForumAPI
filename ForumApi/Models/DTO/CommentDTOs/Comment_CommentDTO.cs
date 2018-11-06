@@ -8,6 +8,5 @@ namespace ForumApi.Models.DTO.CommentDTOs
 {
     public class Comment_CommentDTO : BaseCommentDTO
     {
-        public int PostID { get; set; }
     }
 }

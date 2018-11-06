@@ -39,7 +39,7 @@ namespace ForumApi.Controllers
             if(user != null)
             {
                 string tokenString = generateJSONWebToken(user);
-                response = Ok(new { token = tokenString });
+                response = Ok(new { token = tokenString, user = user.UserId });
             }
             return response;
         }
@@ -51,7 +51,9 @@ namespace ForumApi.Controllers
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Name) //add more claims
+                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                new Claim("DateJoined", user.CreationDate.ToString("yyyy-MM-dd")),
+                new Claim(JwtRegisteredClaimNames.NameId, user.UserId.ToString())
             };
 
             var token = new JwtSecurityToken(config["Jwt:Issuer"], config["Jwt:Issuer"], claims, expires: DateTime.Now.AddMinutes(120), signingCredentials: credentials);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ForumApi.Models;
+using ForumApi.Models.DTO.BaseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,21 +41,43 @@ namespace ForumApi.Controllers
         }
         // GET: api/User
         [HttpGet]
-        public List<User> Get()
+        public IActionResult Get()
         {
-            return context.Users.ToList();
+            var res = from u in context.Users
+                      select new BaseUserDTO
+                      {
+                          CreationDate = u.CreationDate,
+                          Name = u.Name,
+                          UserId = u.UserId,
+                          CommentCount = context.Comments.Where(c => c.User.UserId == u.UserId).Count(),
+                          PostCount = context.Posts.Where(p => p.User.UserId == u.UserId).Count()
+                      };
+
+
+            return Ok(res);
         }
 
         // GET: api/User/5
         [HttpGet("{id}", Name = "GetUser")]
         public IActionResult Get(int id)
         {
+
+
             var item = context.Users.Find(id);
             if (item == null)
             {
                 return NotFound();
             }
-            return Ok(item);
+
+            return Ok(new BaseUserDTO()
+            {
+                CreationDate = item.CreationDate,
+                Name = item.Name,
+                UserId = item.UserId,
+                CommentCount = context.Comments.Where(c => c.User.UserId == item.UserId).Count(),
+                PostCount = context.Posts.Where(p => p.User.UserId == item.UserId).Count()
+
+            });
         }
 
         // POST: api/User

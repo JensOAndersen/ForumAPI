@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ForumApi.Models;
 using ForumApi.Models.DTO.CommentDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,7 @@ namespace ForumApi.Controllers
             }
         }
         // GET: api/Comments
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -55,6 +57,7 @@ namespace ForumApi.Controllers
 
         // GET: api/Comments/5
         [HttpGet("{id}", Name = "GetComments")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             var res = context.Comments
@@ -72,8 +75,13 @@ namespace ForumApi.Controllers
 
         // POST: api/Comments
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] Comment_CommentDTO value)
         {
+            //i've got the request and headers here, need to figure out how to access the JWT token and get the post ID from it.
+            var re = Request;
+            var headers = re.Headers;
+
             var user = context.Users.Find(value.User.UserId);
             var post = context.Posts.Find(value.PostID);
             if (user == null || post == null)
