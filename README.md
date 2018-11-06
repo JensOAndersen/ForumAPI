@@ -17,3 +17,5 @@ What i could do better:
   * Unit tests, i know how to make them, but i dont know how to unit test an API, there's also something strange with DTO's here (maybe)
   
 All in all, a fun project, feel free to fork and inspect it.
+
+For the next project i'll probably start with the backend, make everything work, then begin constructing the frontend.
